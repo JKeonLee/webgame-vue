@@ -9,9 +9,9 @@
 </head>
 <body>
     <div id="root">
-        <word-chain></word-chain>
-        <word-chain></word-chain>
-        <word-chain></word-chain>
+        <word-chain start-word="기러기"></word-chain>
+        <word-chain start-word="일요일"></word-chain>
+        <word-chain start-word="토마토"></word-chain>
     </div>
     <script>
         Vue.component('word-chain', {
@@ -25,9 +25,10 @@
             </form>            
         </div>
             `,
+            props:['startWord'],
             data() {
                 return {
-                question:'끝말잇기',
+                question: this.startWord,
                 answer:'',
                 result:''
             };

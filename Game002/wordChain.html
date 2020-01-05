@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>wordChain</title>
+</head>
+<body>
+    <div id="root">
+        <h1>{{question}}</h1>
+        <form v-on:submit="submitAnswer">
+            <input type="text" v-model="answer" ref="cursor">
+            <button type="submit">입력</button>
+            <div>{{result}}</div>
+        </form>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <script>
+        const app = new Vue({
+            el: '#root',
+            data: {
+                question:'끝말잇기',
+                answer:'',
+                result:''
+            },
+            methods:{
+                submitAnswer(e){
+                    e.preventDefault();
+                    if(this.question[this.question.length-1] === this.answer[0]){
+                        this.result = '딩동댕!';
+                        this.question = this.answer;
+                        this.answer = '';
+                        this.$refs.cursor.focus();
+                    } else{
+                        this.result='땡!';
+                        this.$refs.cursor.focus();
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>

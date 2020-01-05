@@ -5,26 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>wordChain</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
 </head>
 <body>
     <div id="root">
-        <h1>{{question}}</h1>
-        <form v-on:submit="submitAnswer">
-            <input type="text" v-model="answer" ref="cursor">
-            <button type="submit">입력</button>
-            <div>{{result}}</div>
-        </form>
+        <word-chain></word-chain>
+        <word-chain></word-chain>
+        <word-chain></word-chain>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
     <script>
-        const app = new Vue({
-            el: '#root',
-            data: {
+        Vue.component('word-chain', {
+            template:`
+        <div>
+            <h1>{{question}}</h1>
+            <form v-on:submit="submitAnswer">
+                <input type="text" v-model="answer" ref="cursor">
+                <button type="submit">입력</button>
+                <div>{{result}}</div>
+            </form>            
+        </div>
+            `,
+            data() {
+                return {
                 question:'끝말잇기',
                 answer:'',
                 result:''
+            };
             },
-            methods:{
+            methods: {
                 submitAnswer(e){
                     e.preventDefault();
                     if(this.question[this.question.length-1] === this.answer[0]){
@@ -34,10 +42,16 @@
                         this.$refs.cursor.focus();
                     } else{
                         this.result='땡!';
+                        this.answer = '';
                         this.$refs.cursor.focus();
                     }
                 }
             }
+        });
+    </script>
+    <script>
+        const app = new Vue({
+            el: '#root',
         })
     </script>
 </body>
